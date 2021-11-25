@@ -1,3 +1,13 @@
+"""
+Description : Part of 100 
+
+
+Author: Ahmed Harbi
+Date: November 2021
+
+"""
+
+
 city_name = input("What is the name of the city you grow up in?\n")
 pet_name = input("What is the name of your pet?\n")
 
