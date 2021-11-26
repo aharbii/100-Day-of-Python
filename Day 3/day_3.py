@@ -1,3 +1,17 @@
+"""
+Description : Part of 100 Days of Code - The Complete
+Python Pro Bootcamp for 2022
+
+Day 3 : Control Flow and Logical Operators
+
+Day 3 Project: Treasure Island
+
+
+Author: Ahmed Harbi
+Date: November 2021
+
+"""
+
 print('''
 *******************************************************************************
           |                   |                  |                     |
