@@ -46,7 +46,7 @@ def encoding(message, shift):
             if shifted < len(letters_list):
                 encoded += letters_list[shifted]
             else:
-                shifted -= len(letters_list) - 1
+                shifted -= len(letters_list)
                 encoded += letters_list[shifted]
         else:
             encoded += letter
@@ -63,10 +63,7 @@ def decoding(message, shift):
                 letters_list = upper_letters
             index = letters_list.index(letter)
             shifted = index - shift
-            if shifted > 0:
-                decoded += letters_list[shifted]
-            else:
-                decoded += letters_list[shifted - 1]
+            decoded += letters_list[shifted]
         else:
             decoded += letter
 
