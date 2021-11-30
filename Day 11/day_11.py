@@ -59,16 +59,19 @@ def check_bust(score):
     
     return bust
 
-def decide_winner(first_player, second_player):
-    first_player_diff = 21 - first_player
-    second_player_diff = 21 - second_player
-
-    if second_player_diff > first_player_diff:
-        print("You win!")
-    elif second_player_diff == first_player_diff:
-        print("It's a draw!")
+def decide_winner(first_player, second_player, second_bust):
+    if second_bust:
+        print("You win.")
     else:
-        print("You lose.")
+        first_player_diff = 21 - first_player
+        second_player_diff = 21 - second_player
+
+        if second_player_diff > first_player_diff:
+            print("You win!")
+        elif second_player_diff == first_player_diff:
+            print("It's a draw!")
+        else:
+            print("You lose.")
 
 def init_cards():
     """Creating array of two random cards"""
@@ -131,12 +134,14 @@ while(start_game == 'y'):
         second_player_score = sum(second_player_cards_value)
         second_player_score = decide_ace(second_player_score)
 
+        second_player_bust = check_bust(second_player_score)
+
         # showing final scores
-        print(f"Your final hand: {first_player_cards}")
-        print(f"Computer's final hand: {second_player_cards}")
+        print(f"Your final hand: {first_player_cards}, Final score = {first_player_score}")
+        print(f"Computer's final hand: {second_player_cards}, Final score = {second_player_score}")
 
         # showwing winner
-        decide_winner(first_player_score, second_player_score)
+        decide_winner(first_player_score, second_player_score, second_player_bust)
 
     # start new round or end the game
     start_game = input("Do you want to play BlackJack Game? hit 'y' or 'n'.     ")
