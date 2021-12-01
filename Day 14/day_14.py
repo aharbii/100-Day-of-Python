@@ -8,14 +8,6 @@ Author: Ahmed Harbi
 Date: December 2021
 """
 
-# Create Dictionary of celebrities and their followers
-# get two random keys from dictionary
-# Ask user to guess who is higher
-
-# if right get the right answer and compare it to another random key, count score
-# keep going 
-# if wrong print sorry you are wrong , view score
-
 import random
 logo = """
     __  ___       __             
