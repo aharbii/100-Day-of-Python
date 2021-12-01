@@ -134,9 +134,9 @@ def get_answer(choice, picked_choices, score, game_end):
     return(score, game_end)
 
 def new_round(picked_choices, score, game_end):
-    print(f"Compare A: {picked_choices[0][0]}")
+    print(f"Compare A: {picked_choices[0][0]}.")
     print(vs)
-    print(f"Compare B: {picked_choices[1][0]}")
+    print(f"Against B: {picked_choices[1][0]}.")
 
     choice = input("Who has more followers? Type 'A' or 'B'.    ")
     score, game_end = get_answer(choice, picked_choices, score, game_end)
@@ -160,6 +160,3 @@ while(not game_end):
 
 if(game_end):
     print(f"Sorry, wrong answer. Game Over.\n")
-
-
-    
