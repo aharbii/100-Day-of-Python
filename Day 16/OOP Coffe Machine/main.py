@@ -27,10 +27,10 @@ while (turn_on):
         money_machine.report()
     elif order == "off":
         turn_on = False
-    elif order in drinks:
-        drink = menu.find_drink(order)
-        if coffee_maker.is_resource_sufficient(drink):
-            if money_machine.make_payment(drink.cost):
-                coffee_maker.make_coffee(drink)
     else:
         drink = menu.find_drink(order)
+        if drink:
+            if coffee_maker.is_resource_sufficient(drink) and money_machine.make_payment(drink.cost):
+                coffee_maker.make_coffee(drink)
+        else:
+            continue
