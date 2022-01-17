@@ -3,8 +3,7 @@ import colorgram
 import turtle
 
 rgb_colors = []
-colors = colorgram.extract(
-    '/Users/aharbii/Data/Computer Vision/Python/100 Days of Python/Day 18/image.jpg', 30)
+colors = colorgram.extract('Day 18/image.jpg', 30)
 for color in colors:
     rgb_colors.append(color.rgb)
 
