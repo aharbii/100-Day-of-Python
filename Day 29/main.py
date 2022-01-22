@@ -1,7 +1,7 @@
 import random
 from tkinter import *
-import pandas
 from tkinter import messagebox
+import json
 
 letters_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -93,18 +93,49 @@ def save_data():
         messagebox.showwarning(message="Username is required")
         missing_data = 1
     if (not missing_data):
-        is_ok = messagebox.askokcancel(title=f"Confirm {website}", message=f"Your Data:\nEmail: {email}\nUsername: {username}\nPassword: {password}")
-        if (is_ok):
-            new_data = {'Website': [website],
-                        'Email': [email],
-                        'Username': [username],
-                        'Password': [final_password]
+        new_data = {    
+                    website: {
+                        'Email': email,
+                        'Username': username,
+                        'Password': final_password
                         }
-            df = pandas.DataFrame(new_data)
-            df.to_csv("Day 29/passwords.csv", mode='a', index=False, header=False)
+                    }
+        try:
+            with open("Day 29/data.json", "r") as data_file:
+                # json.dump(new_data, data_file, indent=4)
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open("Day 29/data.json", 'w') as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            data.update(new_data)
+            with open("Day 29/data.json", "w") as data_file:
+                json.dump(data, data_file, indent=4)
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
             user_name_entry.delete(0, END)
+            
+# ---------------------------- Search --------------------------------- #
+def search():
+    website = website_entry.get()
+    if (website == "" or website == "Enter website name or URL"):
+        messagebox.showwarning(message="Website is required")
+    else:
+        try:
+            with open("Day 29/data.json", 'r') as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            messagebox.showinfo(title="Error", message="No Data File Found.")
+        else:
+                if website in data:
+                    website_data = data[website]
+                    username = website_data["Username"]
+                    email = website_data["Email"]
+                    password = website_data["Password"]
+                    messagebox.showinfo(title=website, message=f"username:{username}\nemail:{email}\npassword:{password}", )
+                else:
+                    messagebox.showinfo(message=f"There is no saved password for {website}")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -123,9 +154,13 @@ canvas.grid(row=0, column=1)
 website_label = Label(text="Website", font=FONT)
 website_label.grid(row=1, column=0)
 
-website_entry = Entry(width=35)
+website_entry = Entry(width=21)
 website_entry.insert(END, string="Enter website name or URL")
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry.grid(row=1, column=1)
+
+search_button = Button(text="Search",
+                         command=search, width=10)
+search_button.grid(row=1, column=2)
 
 # Username
 user_name_label = Label(text="Username", font=FONT)
