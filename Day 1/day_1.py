@@ -7,7 +7,6 @@ Data
 
 Day 1 Project: Band Name Generator
 
-si
 Author: Ahmed Harbi
 Date: November 2021
 
